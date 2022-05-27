@@ -14,7 +14,7 @@ jobs:
           sudo apt-get install lcov
       - name: building
         run: |
-          mkdir build && cd build
+          mkdir banking/build && cd banking/build
           cmake -DBUILD_TESTS=ON -DCOVERALLS=ON ..
           make
       - name: test
