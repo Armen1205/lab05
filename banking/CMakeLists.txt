@@ -7,9 +7,9 @@ option(COVERALLS "Check coverage" OFF)
 
 project(bank)
 
-add_library(account STATIC banking/Account.cpp banking/Account.h)
-add_library(transaction STATIC banking/Transaction.cpp banking/Transaction.h)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/banking)
+add_library(account STATIC Account.cpp Account.h)
+add_library(transaction STATIC Transaction.cpp Transaction.h)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 include(FetchContent)
 FetchContent_Declare(
@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(googletest)
 if (BUILD_TESTS)
     include(GoogleTest)
     enable_testing()
-    add_executable(bank_test ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp)
+    add_executable(bank_test ${CMAKE_CURRENT_SOURCE_DIR}/::/test.cpp)
     target_link_libraries(bank_test account transaction gtest_main gmock_main)
     gtest_discover_tests(bank_test)
 endif ()
@@ -32,5 +32,3 @@ if (COVERALLS)
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 endif ()
-
-
