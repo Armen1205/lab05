@@ -19,7 +19,7 @@ jobs:
           make
       - name: test
         run: |
-          cd build
+          cd banking/build
           ctest
       - name: coverage
         run: |
